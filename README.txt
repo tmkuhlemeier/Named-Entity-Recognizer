@@ -1,0 +1,1 @@
+The last versions of our pickled models were trained on Tuesday - Wednesday night. We have made some improvements in the mean time to some scripts (mainly comments in BuildModels and EvaluateModels). We tried not to touch the custom_chunker and features script and hope that they remained the same since the training.

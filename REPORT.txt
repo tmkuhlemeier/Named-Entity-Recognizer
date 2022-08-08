@@ -1,0 +1,81 @@
+--- REPORT ---
+
+
+TOP 3 engines (low to high rank):
+
+Trained on full training set and evaluated on full test set (see also Evaluation-output.txt).
+15806 train sents, 2895 test sents.
+Actual NEs in the test data: 2616.
+
+
+(3): NaiveBayes
+Model: Small NER
+The NaiveBayes classifier seemed to work better with small feature sets and certain features. We assume this is because of the independence assumptions NaiveBayes makes (when features are dependent on each other, this may give wrong (overconfident) results). The score was thus lower, but still relatively good (with this feature set). The NaiveBayes model was the quickest classifier to train (0.0004 seconds per sentence).
+
+(features_small) 14 features (see the features.py script for all features)
+Training took 0 h, 0 min, 6.10 s (0.0004s per sentence)
+
+IOB Accuracy:  95.5%%
+Precision:     58.6%%
+Recall:        63.0%%
+F-Measure:     60.7%%
+
+Chunks guessed (proposed) by the recognizer: 2811
+Found correctly (truepos): 1647
+Incorrect guesses (falsepos): 1164
+Missed NEs: (falseneg) 969
+
+
+(2): MaxEnt, IIS algorithm
+Model: Medium NER
+The IIS algorithm was somewhere in between. It could handle many features, but there seemed to be a limit. Some features that performed well on GIS, made the IIS model perform less well (like prevpreviob, or pairs of POS sequences).
+
+(features_medium) 20 features
+Training took 4 h, 11 min, 29.43 s (0.9547s per sentence)
+
+IOB Accuracy:  96.7%%
+Precision:     69.6%%
+Recall:        68.6%%
+F-Measure:     69.1%%
+
+Chunks guessed (proposed) by the recognizer: 2579
+Found correctly (truepos): 1795
+Incorrect guesses (falsepos): 784
+Missed NEs: (falseneg) 821
+
+
+(1): MaxEnt, GIS algorithm
+Model: Complex NER (a.k.a. best.pickle)
+The model with the GIS algorithm had the biggest feature set and performed the best out of all. It looks like this algorithm is the best at implementing features to classify named entities. (It's better to have too many irrelevant features than a small amount of relevant features it seemed with this model.)
+
+(features_complex) 23 features
+Training took 4 h, 19 min, 57.81 s (0.9868s per sentence)
+
+IOB Accuracy:  96.7%%
+Precision:     72.0%%
+Recall:        69.0%%
+F-Measure:     70.5%%
+
+Chunks guessed (proposed) by the recognizer: 2508
+Found correctly (truepos): 1806
+Incorrect guesses (falsepos): 702
+Missed NEs: (falseneg) 810
+
+
+Note that the training time can be different depending on how powerful your computer is. These models were trained on a MacBook Air.
+
+Additional information:
+
+We chose to use a "name == '__main__'" conditional for running commands in the BuildModels and EvaluateModels scripts. This way, the programs can be run from the command line as standalone programs and the scripts can be imported as modules in different scripts.
+
+In addition to the obligatory modifications to the custom_chunker script (addition of NaiveBayes classifier), we added an extra definition "chunker_info" to it. This function returns the engine(if MaxEnt classifier is used), the algorithm and docstring of the features. This is convenient for printing information about the chunker when the chunker is being evaluated. We also made two properties of the ConsecutiveNPChunker class. "self._len_trainset" is the length of the train set (sentences), "self._traintime" is the time the training took. These are used in the EvaluateModels script, as well as in the BuildModels script. The modifications are marked with "###".
+
+We have included the pickled models of all three models that are used in the BuildModels and EvaluateModels scripts. We thought this could be useful. The folder contains four pickled models (the three models and best.pickle (copy of Complex NER.pickle))
+
+We had gladly experimented with more features but unfortunately time kept us from doing so.
+
+Sources used for making lists of names: 
+- Wikipedia: https://nl.wikipedia.org/wiki/Lijst_van_hoofdsteden (for Locations.txt)
+- CSV from notebook: VNC2013.csv
+
+Made by Thomas Kuhlemeier

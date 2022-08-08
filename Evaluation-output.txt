@@ -1,0 +1,66 @@
+
+(evaluated on 12-06-2019 at 21:08:10:)
+MODEL: Small NER
+NaiveBayes
+(features_small) 14 features
+15806 train sents, 2895 test sents
+Training took 0 h, 0 min, 6.10 s (0.0004s per sentence)
+
+Evaluating... Done
+ChunkParse score:
+    IOB Accuracy:  95.5%%
+    Precision:     58.6%%
+    Recall:        63.0%%
+    F-Measure:     60.7%%
+
+Actual NEs in the test data: 2616
+Chunks guessed (proposed) by the recognizer: 2811
+Found correctly (truepos): 1647
+Incorrect guesses (falsepos): 1164
+Missed NEs: (falseneg) 969
+
+
+(evaluated on 12-06-2019 at 21:08:26:)
+MODEL: Medium NER
+MaxEnt, IIS algorithm
+(features_medium) 20 features
+15806 train sents, 2895 test sents
+Training took 4 h, 11 min, 29.43 s (0.9547s per sentence)
+
+Evaluating... Done
+ChunkParse score:
+    IOB Accuracy:  96.7%%
+    Precision:     69.6%%
+    Recall:        68.6%%
+    F-Measure:     69.1%%
+
+Actual NEs in the test data: 2616
+Chunks guessed (proposed) by the recognizer: 2579
+Found correctly (truepos): 1795
+Incorrect guesses (falsepos): 784
+Missed NEs: (falseneg) 821
+
+
+(evaluated on 12-06-2019 at 21:08:39:)
+MODEL: Complex NER
+MaxEnt, GIS algorithm
+(features_complex) 23 features
+15806 train sents, 2895 test sents
+Training took 4 h, 19 min, 57.81 s (0.9868s per sentence)
+
+Evaluating... Done
+ChunkParse score:
+    IOB Accuracy:  96.7%%
+    Precision:     72.0%%
+    Recall:        69.0%%
+    F-Measure:     70.5%%
+
+Actual NEs in the test data: 2616
+Chunks guessed (proposed) by the recognizer: 2508
+Found correctly (truepos): 1806
+Incorrect guesses (falsepos): 702
+Missed NEs: (falseneg) 810
+
+
+Best model: Complex NER (a.k.a. best.pickle)
+
